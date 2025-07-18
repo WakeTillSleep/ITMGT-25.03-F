@@ -1,0 +1,31 @@
+<h4>Hi, {{ request.user.username }}!</h4>
+
+<h2>Your Cart</h2>
+{% if cart_items %}
+    <ul>
+        {% for item in cart_items %}
+            <li>{{ item.quantity }} × {{ item.product.name }}</li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>Your cart is empty.</p>
+{% endif %}
+
+<hr>
+
+<h2>Products</h2>
+{% if products %}
+    <ul>
+        {% for product in products %}
+            <li>
+                <a href="{% url 'product_detail' product.id %}">{{ product.name }}</a> - ₱{{ product.price }}
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No products found.</p>
+{% endif %}
+
+<a href="/checkout">Go to check out</a>
+
+<a href="{% url 'transaction_history' %}">View transaction history</a>

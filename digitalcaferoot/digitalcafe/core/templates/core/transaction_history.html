@@ -1,0 +1,19 @@
+<!-- Just remove the extends and block if you’re not using base.html -->
+<h2>Transaction History</h2>
+
+{% if transaction_data %}
+  {% for entry in transaction_data %}
+    <div style="margin-bottom: 20px;">
+      <strong>Transaction on:</strong> {{ entry.transaction.created_at }}<br>
+      <ul>
+        {% for item in entry.line_items %}
+          <li>{{ item.quantity }} x {{ item.product.name }} - ₱{{ item.product.price }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endfor %}
+{% else %}
+  <p>You have no past transactions.</p>
+{% endif %}
+
+<a href="{% url 'index' %}">Back to homepage</a>
